@@ -4,7 +4,7 @@ Une page d'accueil moderne et responsive pour INDUSTECH, une entreprise spécial
 
 ## Aperçu du Site
 
-Des captures d'écran du site sont disponibles dans le dossier `screenshots/`. Elles montrent les différentes sections et fonctionnalités du site dans différentes tailles d'écran.
+![Image](https://github.com/user-attachments/assets/0151f2e4-7e8d-4922-8cd7-416200b02f49)
 
 ## Technologies Utilisées
 - HTML5
