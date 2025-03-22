@@ -1,0 +1,17 @@
+{
+  "name": "animated-landing-page",
+  "version": "1.0.0",
+  "description": "A modern landing page with Bootstrap and Motion.js animations",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@motionone/dom": "^10.17.0",
+    "bootstrap": "^5.3.3"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+} 
