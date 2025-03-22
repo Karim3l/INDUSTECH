@@ -9,9 +9,14 @@
   },
   "dependencies": {
     "@motionone/dom": "^10.17.0",
-    "bootstrap": "^5.3.3"
+    "aos": "^2.3.4",
+    "bootstrap": "^5.3.3",
+    "countup.js": "^2.8.0",
+    "gsap": "^3.12.7",
+    "scrollmagic": "^2.0.8",
+    "scrolltrigger": "^1.0.1"
   },
   "devDependencies": {
     "live-server": "^1.2.2"
   }
-} 
+}
