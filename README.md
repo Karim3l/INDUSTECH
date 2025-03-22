@@ -43,7 +43,7 @@ npm start
 - **Sections Modulaires** - Structure organisée en sections distinctes et facilement modifiables
 - **Optimisation SEO** - Structure HTML sémantique pour une meilleure indexation
 
-étences Démontrées
+compétences Démontrées
 
 - Design UI/UX complet (de la conception à l'implémentation)
 - Maîtrise de Figma pour la création de maquettes professionnelles
@@ -52,3 +52,7 @@ npm start
 - Création d'animations performantes et esthétiques
 - Adaptation de framework CSS (Bootstrap)
 - Optimisation pour les appareils mobiles
+
+## Mobile :
+![Image](https://github.com/user-attachments/assets/17f26588-5d00-48ad-9455-eb8f386ae589)
+
