@@ -1,34 +1,7 @@
 import { animate, stagger, inView } from "@motionone/dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CountUp } from "countup.js";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
-
-// Initialize AOS
-AOS.init({
-  duration: 800,
-  easing: 'ease-out',
-  once: false,
-  mirror: false
-});
 
 // Wait for DOM to fully load
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize animations
-  initNavbarAnimations();
-  initHeroAnimations();
-  initStatsAnimations();
-  initServiceAnimations();
-  initBenefitAnimations();
-  initPricingAnimations();
-  initIntegrationsAnimations();
-  initCountUpAnimations();
-  initScrollEffects();
-  
   // Direct vanilla JS approach for mobile menu
   const navToggler = document.getElementById('navbarToggler');
   const navMenu = document.getElementById('navbarNav');
@@ -65,413 +38,259 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Navbar animations
-function initNavbarAnimations() {
-  const navbar = document.querySelector('.navbar');
-  
-  // Change navbar style on scroll
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('navbar-scrolled');
-    } else {
-      navbar.classList.remove('navbar-scrolled');
-    }
-  });
-  
-  // Animate navbar items
-  gsap.from('.navbar-brand', {
-    opacity: 0,
-    x: -20,
-    duration: 1,
-    ease: 'power3.out'
-  });
-  
-  gsap.from('.navbar-nav .nav-item', {
-    opacity: 0,
-    y: -20,
+// Hero content animations
+const heroContent = document.querySelector('.hero-content');
+animate(
+  heroContent,
+  { 
+    opacity: [0, 1],
+    transform: ["translateY(20px)", "translateY(0px)"]
+  },
+  { 
     duration: 0.8,
-    stagger: 0.1,
-    ease: 'power3.out'
-  });
-  
-  gsap.from('.btn-sign-up', {
-    opacity: 0,
-    x: 20,
-    duration: 1,
-    ease: 'power3.out'
-  });
-}
+    easing: "ease-out"
+  }
+);
 
-// Hero section animations
-function initHeroAnimations() {
-  const heroTimeline = gsap.timeline();
-  
-  heroTimeline
-    .from('.hero-title', {
-      opacity: 0,
-      y: 30,
-      duration: 1,
-      ease: 'power3.out'
-    })
-    .from('.hero-subtitle', {
-      opacity: 0,
-      y: 20,
-      duration: 0.8,
-      ease: 'power3.out'
-    }, '-=0.6')
-    .from('.hero-content .btn', {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      stagger: 0.2,
-      ease: 'power3.out'
-    }, '-=0.4')
-    .from('.rating-container', {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      ease: 'power3.out'
-    }, '-=0.2');
-    
-  // Continuous floating animation for icons
-  const floatingIcons = document.querySelectorAll('.floating-icon');
-  floatingIcons.forEach(icon => {
-    gsap.to(icon, {
-      y: '-10',
+// Stats cards animation
+const statsContainer = document.querySelector('.stats-container');
+animate(
+  statsContainer,
+  { 
+    opacity: [0, 1],
+    transform: ["translateY(30px)", "translateY(0px)"]
+  },
+  { 
+    duration: 0.8,
+    easing: "ease-out"
+  }
+);
+
+// Floating icons animation
+const floatingIcons = document.querySelectorAll('.floating-icon');
+floatingIcons.forEach(icon => {
+  animate(
+    icon,
+    {
+      transform: ["translate(0px, 0px)", "translate(0px, -10px)", "translate(0px, 0px)"]
+    },
+    {
       duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut'
-    });
-  });
-}
-
-// Stats animations
-function initStatsAnimations() {
-  gsap.from('.stats-container', {
-    opacity: 0,
-    y: 40,
-    duration: 1,
-    ease: 'power3.out',
-    delay: 0.5
-  });
-  
-  // Add staggered reveal for stat cards
-  gsap.from('.stat-card', {
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: 'back.out(1.7)',
-    delay: 0.8
-  });
-}
-
-// Services animations
-function initServiceAnimations() {
-  ScrollTrigger.create({
-    trigger: '.services',
-    start: 'top 80%',
-    onEnter: () => {
-      gsap.from('.services-header', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power3.out'
-      });
-      
-      gsap.from('.service-card', {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out',
-        delay: 0.4
-      });
+      easing: "ease-in-out",
+      repeat: Infinity
     }
-  });
-  
-  // Add hover effect for service cards
-  const serviceCards = document.querySelectorAll('.service-card');
-  serviceCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-      gsap.to(this, {
-        y: -10,
-        boxShadow: '0 20px 50px rgba(27, 59, 54, 0.1)',
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-      
-      gsap.to(this.querySelector('.service-arrow'), {
-        x: 5,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    });
-    
-    card.addEventListener('mouseleave', function() {
-      gsap.to(this, {
-        y: 0,
-        boxShadow: '0 10px 30px rgba(27, 59, 54, 0.05)',
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-      
-      gsap.to(this.querySelector('.service-arrow'), {
-        x: 0,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    });
-  });
-}
+  );
+});
 
-// Benefits animations
-function initBenefitAnimations() {
-  ScrollTrigger.create({
-    trigger: '#benefits',
-    start: 'top 80%',
-    onEnter: () => {
-      gsap.from('.benefits-title, .benefits-subtitle', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out'
-      });
-      
-      gsap.from('.benefit-item', {
-        opacity: 0,
-        x: -30,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out',
-        delay: 0.4
-      });
-      
-      gsap.from('.metrics-card', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power3.out',
-        delay: 0.6
-      });
-      
-      // Chart bars animation
-      gsap.from('.chart-bar', {
-        height: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: 'power3.out',
-        delay: 0.8
-      });
-    }
-  });
-}
-
-// Pricing animations
-function initPricingAnimations() {
-  ScrollTrigger.create({
-    trigger: '#pricing',
-    start: 'top 80%',
-    onEnter: () => {
-      gsap.from('.pricing-header', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power3.out'
-      });
-      
-      gsap.from('.pricing-card', {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'back.out(1.7)',
-        delay: 0.4
-      });
-    }
-  });
-  
-  // Add hover effect for pricing cards
-  const pricingCards = document.querySelectorAll('.pricing-card');
-  pricingCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-      gsap.to(this, {
-        y: -10,
-        boxShadow: '0 20px 50px rgba(27, 59, 54, 0.1)',
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    });
-    
-    card.addEventListener('mouseleave', function() {
-      gsap.to(this, {
-        y: 0,
-        boxShadow: '0 10px 30px rgba(27, 59, 54, 0.05)',
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    });
-  });
-}
-
-// Integrations animations
-function initIntegrationsAnimations() {
-  ScrollTrigger.create({
-    trigger: '#integrations',
-    start: 'top 80%',
-    onEnter: () => {
-      gsap.from('.integrations-content', {
-        opacity: 0,
-        x: -50,
-        duration: 0.8,
-        ease: 'power3.out'
-      });
-      
-      gsap.from('.integration-card', {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'back.out(1.7)',
-        delay: 0.4
-      });
-    }
-  });
-}
-
-// CountUp animations for numbers
-function initCountUpAnimations() {
-  // Options for CountUp
-  const options = {
-    duration: 2.5,
-    useEasing: true,
-    useGrouping: true,
-    separator: ',',
-    decimal: '.'
-  };
-  
-  // Setup CountUp for all stat numbers
-  const setupCountUp = (element, endValue) => {
-    const countUp = new CountUp(element, endValue, options);
-    
-    // Create scroll trigger for each counter
-    ScrollTrigger.create({
-      trigger: element,
-      start: 'top 80%',
-      onEnter: () => {
-        if (!countUp.error) {
-          countUp.start();
-        } else {
-          console.error(countUp.error);
-        }
-      },
-      onEnterBack: () => {
-        countUp.reset();
-        countUp.start();
-      }
-    });
-  };
-  
-  // Apply CountUp to numbers
-  const statNumbers = document.querySelectorAll('.stat-number');
-  statNumbers.forEach(element => {
-    let value = element.textContent;
-    // Extract just the number part
-    let numberValue = parseInt(value.replace(/\D/g, ''));
-    
-    // If it's "100+" make it exactly 100 for animation
-    if (value.includes('+')) {
-      element.textContent = numberValue;
-      setupCountUp(element, numberValue);
-      // Add the plus sign after the animation
-      element.setAttribute('data-suffix', '+');
-    } else {
-      setupCountUp(element, numberValue);
-    }
-  });
-  
-  // Apply to metrics total number
-  const metricsNumber = document.querySelector('.metrics-total-number');
-  if (metricsNumber) {
-    let value = metricsNumber.textContent;
-    let numberValue = parseInt(value.replace(/\D/g, ''));
-    
-    if (value.includes('+')) {
-      metricsNumber.textContent = numberValue;
-      setupCountUp(metricsNumber, numberValue);
-      metricsNumber.setAttribute('data-suffix', '+');
-    } else {
-      setupCountUp(metricsNumber, numberValue);
-    }
+// Rating stars animation
+const stars = document.querySelector('.stars');
+animate(
+  stars,
+  {
+    scale: [0.8, 1],
+    opacity: [0, 1]
+  },
+  {
+    duration: 0.5,
+    delay: 1
   }
-  
-  // Apply to metrics increase
-  const metricsIncrease = document.querySelector('.metrics-increase span');
-  if (metricsIncrease) {
-    let value = metricsIncrease.textContent;
-    let numberValue = parseInt(value);
-    setupCountUp(metricsIncrease, numberValue);
-  }
-}
+);
 
-// General scroll effects
-function initScrollEffects() {
-  // Parallax effect for sections
-  const sections = document.querySelectorAll('section');
-  sections.forEach(section => {
-    gsap.to(section, {
-      backgroundPositionY: "30%",
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true
-      }
-    });
-  });
+// Scroll animations
+inView('.hidden', ({ target }) => {
+  target.classList.add('show');
+  return false;
+});
+
+// Services section animations
+inView('.services-header', ({ target }) => {
+  animate(
+    target,
+    { 
+      opacity: [0, 1],
+      transform: ['translateY(20px)', 'translateY(0)']
+    },
+    {
+      duration: 0.8,
+      easing: 'ease-out'
+    }
+  );
+  return false;
+});
+
+// Service cards stagger animation
+inView('.services-grid', ({ target }) => {
+  animate(
+    target.children,
+    { 
+      opacity: [0, 1],
+      transform: ['translateY(30px)', 'translateY(0)']
+    },
+    {
+      delay: stagger(0.1),
+      duration: 0.8,
+      easing: 'ease-out'
+    }
+  );
+  return false;
+});
+
+// Integrations section animations
+inView('.integrations-content', ({ target }) => {
+  animate(
+    target,
+    { 
+      opacity: [0, 1],
+      transform: ['translateY(20px)', 'translateY(0)']
+    },
+    {
+      duration: 0.8,
+      easing: 'ease-out'
+    }
+  );
+  return false;
+});
+
+// Hub center and circles animations
+inView('.integration-hub', ({ target }) => {
+  // Animate hub center
+  animate(
+    target.querySelector('.hub-center'),
+    {
+      scale: [0, 1],
+      opacity: [0, 1]
+    },
+    {
+      duration: 0.6,
+      easing: 'ease-out'
+    }
+  );
   
-  // Fade in sections on scroll
-  gsap.utils.toArray('.fade-in-section').forEach(section => {
-    gsap.from(section, {
-      opacity: 0,
-      y: 50,
+  // Animate inner circle
+  animate(
+    target.querySelector('.hub-inner-circle'),
+    {
+      scale: [0.5, 1],
+      opacity: [0, 1]
+    },
+    {
+      duration: 0.8,
+      delay: 0.2,
+      easing: 'ease-out'
+    }
+  );
+  
+  // Animate outer circle
+  animate(
+    target.querySelector('.hub-outer-circle'),
+    {
+      scale: [0.5, 1],
+      opacity: [0, 1]
+    },
+    {
       duration: 1,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 80%',
-        end: 'top 50%',
-        toggleActions: 'play none none reverse'
-      }
-    });
-  });
-}
-
-// Utility function to apply AOS attributes to elements
-function applyAOSAttributes() {
-  // Apply to various elements for additional animations
-  const elements = [
-    { selector: '.service-card', attr: { 'data-aos': 'fade-up', 'data-aos-delay': '0' } },
-    { selector: '.benefit-item', attr: { 'data-aos': 'fade-right', 'data-aos-delay': '200' } },
-    { selector: '.pricing-card', attr: { 'data-aos': 'zoom-in', 'data-aos-delay': '0' } },
-    { selector: '.integration-card', attr: { 'data-aos': 'flip-left', 'data-aos-delay': '0' } }
-  ];
+      delay: 0.4,
+      easing: 'ease-out'
+    }
+  );
   
-  elements.forEach(({selector, attr}) => {
-    const els = document.querySelectorAll(selector);
-    els.forEach((el, index) => {
-      Object.entries(attr).forEach(([key, value]) => {
-        // If it's a delay, stagger it based on index
-        if (key === 'data-aos-delay' && value !== '0') {
-          const delay = parseInt(value) + (index * 100);
-          el.setAttribute(key, delay.toString());
-        } else {
-          el.setAttribute(key, value);
-        }
-      });
-    });
+  // Animate inner circle logos with stagger
+  animate(
+    target.querySelectorAll('.hub-inner-circle .integration-logo'),
+    {
+      opacity: [0, 1],
+      scale: [0.5, 1]
+    },
+    {
+      delay: stagger(0.1, { start: 0.6 }),
+      duration: 0.5,
+      easing: 'ease-out'
+    }
+  );
+  
+  // Animate outer circle logos with stagger
+  animate(
+    target.querySelectorAll('.hub-outer-circle .integration-logo'),
+    {
+      opacity: [0, 1],
+      scale: [0.5, 1]
+    },
+    {
+      delay: stagger(0.1, { start: 0.8 }),
+      duration: 0.5,
+      easing: 'ease-out'
+    }
+  );
+  
+  // Add subtle floating animation to all logos
+  const allLogos = target.querySelectorAll('.integration-logo');
+  allLogos.forEach((logo, index) => {
+    animate(
+      logo,
+      {
+        transform: ['translateY(0px)', 'translateY(-5px)', 'translateY(0px)']
+      },
+      {
+        delay: index * 0.2,
+        duration: 2 + index * 0.3,
+        easing: 'ease-in-out',
+        repeat: Infinity
+      }
+    );
   });
-} 
+  
+  return false;
+});
+
+// CTA section animations
+inView('.cta-content', ({ target }) => {
+  animate(
+    target,
+    { 
+      opacity: [0, 1],
+      transform: ['translateY(20px)', 'translateY(0)']
+    },
+    {
+      duration: 0.8,
+      easing: 'ease-out'
+    }
+  );
+  return false;
+});
+
+// Footer animations
+inView('.footer-content', ({ target }) => {
+  const columns = target.querySelectorAll('.footer-column, .footer-brand');
+  
+  animate(
+    columns,
+    { 
+      opacity: [0, 1],
+      transform: ['translateY(20px)', 'translateY(0)']
+    },
+    {
+      duration: 0.6,
+      delay: stagger(0.1),
+      easing: 'ease-out'
+    }
+  );
+  
+  return false;
+});
+
+inView('.footer-bottom', ({ target }) => {
+  animate(
+    target,
+    { 
+      opacity: [0, 1],
+      transform: ['translateY(10px)', 'translateY(0)']
+    },
+    {
+      duration: 0.5,
+      easing: 'ease-out',
+      delay: 0.3
+    }
+  );
+  
+  return false;
+}); 
